@@ -19,6 +19,9 @@ public class Game extends Canvas implements Runnable {
 	// Creates a handler for the game objects
 	private Handler handler;
 
+	// Create the HUD
+	private HUD hud;
+
 	private Random r;
 
 	public Game() {
@@ -26,6 +29,7 @@ public class Game extends Canvas implements Runnable {
 		this.addKeyListener(new KeyInput(handler));
 
 		new Window(WIDTH, HEIGHT, "Lets build a game!", this);
+		hud = new HUD();
 
 		r = new Random();
 
@@ -53,6 +57,7 @@ public class Game extends Canvas implements Runnable {
 
 	// Game loop
 	public void run() {
+		this.requestFocus();
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
@@ -86,7 +91,7 @@ public class Game extends Canvas implements Runnable {
 
 	private void tick() {
 		handler.tick();
-
+		hud.tick();
 	}
 
 	private void render() {
@@ -98,7 +103,7 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 
-		// Create graphics
+		// Create graphics from BufferStrategy
 		Graphics g = bs.getDrawGraphics();
 
 		// Fill the canvas with a color
@@ -106,6 +111,7 @@ public class Game extends Canvas implements Runnable {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		handler.render(g);
+		hud.render(g);
 
 		g.dispose();
 		bs.show();

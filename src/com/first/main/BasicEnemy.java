@@ -27,7 +27,9 @@ public class BasicEnemy extends GameObject {
 
 	public void render(Graphics g) {
 		g.setColor(Color.red);
-		g.fillRect(x, y, 16, 16);
+
+		g.fillOval(x, y, 16, 16);
+
 	}
 
 }
