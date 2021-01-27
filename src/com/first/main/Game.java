@@ -28,13 +28,15 @@ public class Game extends Canvas implements Runnable {
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
 
-		new Window(WIDTH, HEIGHT, "Lets build a game!", this);
+		new Window(WIDTH, HEIGHT, "Simple Snake", this);
 		hud = new HUD();
 
 		r = new Random();
 
-		handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
-		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
+		handler.addObject(new Player(14, 14, ID.Player, handler));
+		handler.addObject(new Food(0, 0, ID.Food, handler));
+		// handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT),
+		// ID.BasicEnemy, handler));
 
 	}
 
@@ -92,6 +94,7 @@ public class Game extends Canvas implements Runnable {
 	private void tick() {
 		handler.tick();
 		hud.tick();
+
 	}
 
 	private void render() {
